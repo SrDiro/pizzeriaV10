@@ -8,8 +8,12 @@ and open the template in the editor.
     Author     : daw
 */
 
+#fondoTab1{
+    -fx-background-images: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/menu.png);
+}
+
 #cabecera{
-    -fx-background-images: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cabecera.png);
+    
 }
 
 .tab-pane .tab-header-area .tab-header-background {

@@ -15,10 +15,12 @@ public class FXMLDocumentController implements Initializable {
     private Tab tab2;
     @FXML
     private Pane cabecera;
+    @FXML
+    private AnchorPane fondoTab1;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cabecera.setStyle("-fx-background-images: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cabecera.png");
+        cabecera.setStyle("-fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cabecera.png)");
     }    
     
     

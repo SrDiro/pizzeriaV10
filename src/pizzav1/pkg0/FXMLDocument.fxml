@@ -9,13 +9,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="438.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzav1.pkg0.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="438.0" prefWidth="701.0" stylesheets="@css.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzav1.pkg0.FXMLDocumentController">
    <children>
       <TabPane layoutY="4.0" prefHeight="438.0" prefWidth="701.0" stylesheets="@css.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab id="tab2" fx:id="tab2" text="Nuestros productos">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="fondoTab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Pane fx:id="cabecera" prefHeight="110.0" prefWidth="701.0" stylesheets="@css.css" />
                      </children></AnchorPane>
