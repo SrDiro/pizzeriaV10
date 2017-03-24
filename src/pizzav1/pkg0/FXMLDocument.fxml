@@ -15,25 +15,86 @@
         <tabs>
           <Tab id="tab2" fx:id="tab2" text="Nuestros productos">
             <content>
-              <AnchorPane fx:id="fondoTab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="fondoTab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@css.css">
                      <children>
-                        <Pane fx:id="cabecera" prefHeight="110.0" prefWidth="701.0" stylesheets="@css.css" />
+                        <Pane fx:id="pane1" layoutX="60.0" layoutY="80.0" prefHeight="60.0" prefWidth="60.0" stylesheets="@css.css" />
+                        <Pane fx:id="pane2" layoutX="60.0" layoutY="176.0" prefHeight="60.0" prefWidth="60.0" stylesheets="@css.css" />
+                        <Pane fx:id="pane3" layoutX="60.0" layoutY="274.0" prefHeight="60.0" prefWidth="60.0" stylesheets="@css.css" />
                      </children></AnchorPane>
             </content>
           </Tab>
             <Tab text="Pizza al gusto">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="fondoTab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@css.css">
+                     <children>
+                        <Pane fx:id="paneMasa" layoutX="39.0" layoutY="46.0" prefHeight="125.0" prefWidth="108.0" stylesheets="@css.css">
+                           <children>
+                              <RadioButton fx:id="rbNormal" layoutX="15.0" layoutY="31.0" mnemonicParsing="false" onAction="#tipoMasa" text="Normal" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tiposPizza" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbIntegral" layoutX="15.0" layoutY="68.0" mnemonicParsing="false" onAction="#tipoMasa" text="Integral" textFill="WHITE" toggleGroup="$tiposPizza">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </Pane>
+                        <Label fx:id="labelMasa" layoutX="46.0" layoutY="21.0" text="Masa" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="paneTipoPizza" layoutX="166.0" layoutY="46.0" prefHeight="125.0" prefWidth="190.0" stylesheets="@css.css">
+                           <children>
+                              <ComboBox fx:id="cbTipoPizza" layoutX="20.0" layoutY="21.0" onAction="#tipoPizza" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                        <Label fx:id="labelTipoPizza" layoutX="174.0" layoutY="21.0" text="Tipo Pizza" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="paneIngredientes" layoutX="373.0" layoutY="46.0" prefHeight="125.0" prefWidth="135.0" stylesheets="@css.css">
+                           <children>
+                              <ListView fx:id="lvIngredientes" layoutX="8.0" layoutY="7.0" onMouseClicked="#tipoIngredientes" prefHeight="111.0" prefWidth="119.0" />
+                           </children>
+                        </Pane>
+                        <Label fx:id="labelIngredientes" layoutX="373.0" layoutY="21.0" text="Ingredientes extra" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="paneTamano" layoutX="527.0" layoutY="46.0" prefHeight="125.0" prefWidth="141.0" stylesheets="@css.css" />
+                        <Label fx:id="labelTamano" layoutX="527.0" layoutY="21.0" text="Tamaño" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold Italic" size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane fx:id="panePedido" layoutX="39.0" layoutY="205.0" prefHeight="185.0" prefWidth="629.0" stylesheets="@css.css">
+                           <children>
+                              <Label fx:id="labelPrueba" layoutX="26.0" layoutY="68.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Precios">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="fondoTab3" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@css.css" />
               </content>
             </Tab>
             <Tab text="Administración">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="fondoTab4" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@css.css" />
               </content>
             </Tab>
         </tabs>

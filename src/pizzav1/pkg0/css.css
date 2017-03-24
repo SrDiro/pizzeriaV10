@@ -7,14 +7,24 @@ and open the template in the editor.
     Created on : 23-mar-2017, 11:12:13
     Author     : daw
 */
-
-#fondoTab1{
-    -fx-background-images: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/menu.png);
+#fondoTab1, #fondoTab2, #fondoTab3, #fondoTab4{
+    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cabecera.png);
 }
 
-#cabecera{
-    
+#pane1, #pane2, #pane3{
+   -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cuatroQueso.png);
+   -fx-background-size: 60px 60px;
 }
+
+#paneMasa, #paneTipoPizza, #paneIngredientes, #paneTamano, #panePedido{
+    -fx-background-color: rgba(193,8,16,0.3);
+    -fx-background-radius: 15px;
+}
+
+#paneMasa:hover, #paneTipoPizza:hover, #paneIngredientes:hover, #paneTamano:hover, #panePedido:hover{
+    -fx-background-color: rgba(193,8,16,1);
+}
+
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
