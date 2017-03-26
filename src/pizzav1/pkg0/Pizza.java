@@ -86,10 +86,12 @@ public class Pizza {
         double precio;
         for (String ingrediente : preciosExtra.keySet()) {
             precio = preciosExtra.get(ingrediente);
-            precioIngredientes = precioIngredientes + precio;
+            precioIngredientes = precioIngredientes + precio;            
         }
 
         //CALCULO PRECIO TAMAÑO
+        System.out.println(preciosExtra.toString());
+        System.out.println(precioIngredientes);
         precioTamano = buscarPrecio(getTamano());
 
         total = (precioMasa + precioTipo + precioIngredientes) * precioTamano;
@@ -104,5 +106,33 @@ public class Pizza {
 
         return tiquet;
     }
+
+    public String ingredientes() {
+        String cadena = "", jamon = "", queso = "", tomate = "", cebolla = "", olivas = "";
+        for (String ingrediente : preciosExtra.keySet()) {
+            
+            if (ingrediente.equals("Jamon")) {
+                jamon = "Jamón, ";
+            }
+            if (ingrediente.equals("Queso")) {
+                queso = "Queso, ";
+            }
+            if (ingrediente.equals("Tomate")) {
+                tomate = "Tomate, ";
+            }
+            if (ingrediente.equals("Cebolla")) {
+                cebolla = "Cebolla, ";
+            }
+            if (ingrediente.equals("Olivas")) {
+                olivas = "Olivas";
+            }
+        }
+        
+        cadena = jamon + queso + tomate + cebolla + olivas;
+        
+        return cadena;
+    }
+    
+    
 
 }
