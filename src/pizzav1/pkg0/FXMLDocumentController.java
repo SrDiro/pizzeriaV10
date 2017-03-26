@@ -16,6 +16,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -24,8 +25,6 @@ import javafx.scene.layout.Pane;
 
 public class FXMLDocumentController implements Initializable {
     
-    @FXML
-    private Spinner<String> spinnerPrueba ;
     @FXML
     private AnchorPane fondoTab1;
     @FXML
@@ -85,29 +84,69 @@ public class FXMLDocumentController implements Initializable {
     private CheckBox cbMargarita;
     @FXML
     private Button finalizarCompra;
+    @FXML
+    private Spinner<String> spinnerTamano;
     
     //MIS ATRIBUTOS    
-    ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Básica", "Cuatro Quesos", "Barbacoa", "Mexicana");
-    ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamón", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
+    ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
+    ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
+    ObservableList<String> listaTamanos = FXCollections.observableArrayList("Familiar", "Grande", "Mediana", "Pequeña");
     ObservableList<String> list = FXCollections.observableArrayList();
     
     String tipoMasa = "", tipoPizza = "", tamano = "";
     private Pizza p1;
-    @FXML
-    private Spinner<?> spinner;
     
+        
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbTipoPizza.setItems(listaTipoPizzas);
         cbTipoPizza.setValue("Tipo...");
         lvIngredientes.setItems(listaIngredientes);
-
+                
         lvIngredientes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        paneFuego.setVisible(false);       
+        paneFuego.setVisible(false);
+        
+        //SPINNER (Hecho por mi)
+        SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<String>(listaTamanos);        
+        spinnerTamano.setValueFactory(valueFactory);        
+        valueFactory.setValue("Pequeña");
+//        spinnerTamano.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_VERTICAL);
+        
+//        Posiciones de las flechas de seleccion en el Spinner
+//        STYLE_CLASS_ARROWS_ON_RIGHT_HORIZONTAL
+//        STYLE_CLASS_ARROWS_ON_LEFT_VERTICAL
+//        STYLE_CLASS_ARROWS_ON_LEFT_HORIZONTAL
+//        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
+//        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL        
         
     }
+    
+    // Nuestros productos
+    @FXML
+    private void comprarPizza(ActionEvent event) {
+        double total, precioCuatroQuesos = 0.0, precioBarbacoa = 0.0, precioMargarita = 0.0;
+        if (cbCuatroQuesos.isSelected()) {
+            precioCuatroQuesos = 11.50;
+        }
+        if (cbBarbacoa.isSelected()) {
+            precioBarbacoa = 10.50;
+        }
+        if (cbMargarita.isSelected()) {
+            precioMargarita = 9.95;
+        }
 
+        total = precioCuatroQuesos + precioBarbacoa + precioMargarita;
+
+        if (total == 0.0) {
+            labelTotal.setText("0€");
+        } else {
+            labelTotal.setText(total + "€");
+        }
+
+    }
+    
+    //Pizza al gusto
     @FXML
     private void tipoMasa(ActionEvent event) {
         if (rbNormal.isSelected()) {
@@ -149,31 +188,6 @@ public class FXMLDocumentController implements Initializable {
 //
 //    }
     
-    
-
-    @FXML
-    private void comprarPizza(ActionEvent event) {
-        double total, precioCuatroQuesos = 0.0, precioBarbacoa = 0.0, precioMargarita = 0.0;
-        if (cbCuatroQuesos.isSelected()) {
-            precioCuatroQuesos = 11.50;
-        }
-        if (cbBarbacoa.isSelected()) {
-            precioBarbacoa = 10.50;
-        }
-        if (cbMargarita.isSelected()) {
-            precioMargarita = 9.95;
-        }
-
-        total = precioCuatroQuesos + precioBarbacoa + precioMargarita;
-
-        if (total == 0.0) {
-            labelTotal.setText("0€");
-        } else {
-            labelTotal.setText(total + "€");
-        }
-
-    }
-
     @FXML
     private void tipoIngredientes(MouseEvent event) {
     }

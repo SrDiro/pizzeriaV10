@@ -9,37 +9,53 @@ public class Pizza {
     private String tipoPizza = "";
     private String tamano = "";
 
-    public Map<String, Double> precios = new HashMap<>();
-
+    private static final Map<String, Double> precios = new HashMap<>();
+    static{
+    precios.put("Normal", 9.0);
+    precios.put("Integral", 9.50);
+    precios.put("Basica", 3.0);
+    precios.put("Cuatro Quesos", 5.0);
+    precios.put("Barbacoa", 7.0);
+    precios.put("Mexicana", 8.5);
+    precios.put("Sin extra", 0.0);
+    precios.put("Jamon", 0.5);
+    precios.put("Queso", 0.75);
+    precios.put("Tomate", 1.5);
+    precios.put("Cebolla", 2.5);
+    precios.put("Olivas", 1.0);    
+    
+    }
+        
     public Pizza(String masa, String tipoPizza, String tamano) {
         this.masa = masa;
         this.tipoPizza = tipoPizza;
-        this.tamano = tamano;
+        this.tamano = tamano;        
     }
 
     public String getMasa() {
         return masa;
     }
 
-    public void setMasa(String masa) {
-        this.masa = masa;
-    }
-
-    public String getTipo() {
+    public String getTipoPizza() {
         return tipoPizza;
     }
-
-    public void setTipo(String tipo) {
-        this.tipoPizza = tipo;
+        
+    public void modificarPrecios(String nombre, double cantidad) {
+        precios.computeIfPresent(nombre, (k, v) -> cantidad);
     }
-
-    public String getTamano() {
-        return tamano;
+    
+    private double buscarPrecio(String nombre){
+        double precio = 0.0;
+        
+        for(String nombres : precios.keySet()){
+            if (nombres.equalsIgnoreCase(nombre)) {
+                precio = precios.get(nombres);
+            }
+            
+        }
+        return precio;
     }
-
-    public void setTamano(String tamano) {
-        this.tamano = tamano;
-    }
+    
 
     public double calcularPrecio() {
 
@@ -49,22 +65,10 @@ public class Pizza {
         double precioSinExtra = 0.0, precioJamon = 0.0, precioQueso = 0.0, precioTomate = 0.0, precioCebolla = 0.0, precioOlivas = 0.0;
 
         //CALCULO PRECIO TIPO MASA
-        if (this.masa.equalsIgnoreCase("Normal")) {
-            precioMasa = 9.0;
-        } else if (this.masa.equalsIgnoreCase("Integral")) {
-            precioMasa = 9.5;
-        }
+        precioMasa = buscarPrecio(getMasa());
 
         //CALCULO PRECIO TIPO DE PIZZA
-        if (this.tipoPizza.equalsIgnoreCase("Básica")) {
-            precioTipo = 3.0;
-        } else if (this.tipoPizza.equalsIgnoreCase("Cuatro Quesos")) {
-            precioTipo = 5.0;
-        } else if (this.tipoPizza.equalsIgnoreCase("Barbacoa")) {
-            precioTipo = 7.0;
-        } else if (this.tipoPizza.equalsIgnoreCase("Mexicana")) {
-            precioTipo = 8.5;
-        }
+        precioTipo = buscarPrecio(getTipoPizza());
         
         //CALCUALAR PRECIO INGREDIENTES
 //        for(String ingrediente : precios.keySet()){
