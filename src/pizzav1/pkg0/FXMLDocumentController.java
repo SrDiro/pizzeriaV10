@@ -90,11 +90,12 @@ public class FXMLDocumentController implements Initializable {
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
-    ObservableList<String> listaTamanos = FXCollections.observableArrayList("Familiar", "Grande", "Mediana", "Pequeña");
+    ObservableList<String> listaTamanos = FXCollections.observableArrayList("Grande", "Mediana", "Pequeña");
     ObservableList<String> list = FXCollections.observableArrayList();
     
     String tipoMasa = "", tipoPizza = "", tamano = "";
     private Pizza p1;
+    private Pizza pizza;
     
         
     
@@ -168,28 +169,31 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-//    @FXML
-//    private void tipoIngredientes(MouseEvent event) {
-//
-//        paneFuego.setVisible(false);
-//
-//        ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
-//
-//        for (String ingrediente : selectedItems) {
-//            p1.precios.put(ingrediente, Double.NaN);
-//            
-//            if (ingrediente.equalsIgnoreCase("Picante")) {
-//                paneFuego.setVisible(true);
-//            }
-//
-//        }
-//
-//        labelPrueba.setText(pizza.calcularPrecio() + "");
-//
-//    }
-    
     @FXML
     private void tipoIngredientes(MouseEvent event) {
+
+        paneFuego.setVisible(false);
+        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+        ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
+
+        for (String ingrediente : selectedItems) {
+            p1.preciosExtra.put(ingrediente, p1.buscarPrecio(ingrediente));
+            if (ingrediente.equalsIgnoreCase("Picante")) {
+                paneFuego.setVisible(true);
+            }
+
+        }
+
+        labelPrueba.setText(p1.calcularPrecio() + "");
+
+    }
+
+    @FXML
+    private void tamano(MouseEvent event) {
+        tamano = spinnerTamano.getValue();
+        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+        
+        labelPrueba.setText(p1.calcularPrecio() + "");
     }
 
 }
