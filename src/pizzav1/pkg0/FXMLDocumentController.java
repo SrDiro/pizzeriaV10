@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -97,7 +99,6 @@ public class FXMLDocumentController implements Initializable {
     private Label precioFinalPedido;
     @FXML
     private Pane paneTodosIngredientes;
-    private Pane paneBuscarIngrediente;
     @FXML
     private Button botonMostrarTodos;
     @FXML
@@ -112,8 +113,19 @@ public class FXMLDocumentController implements Initializable {
     private Label mostrarPrecioOlivas;
     @FXML
     private Button botonBuscarPrecio;
-    
-    
+    @FXML
+    private TextField tfBuscar;
+    @FXML
+    private Pane paneJamon;
+    @FXML
+    private Pane paneQueso;
+    @FXML
+    private Pane paneTomate;
+    @FXML
+    private Pane paneCebolla;
+    @FXML
+    private Pane paneOlivas;
+
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
@@ -123,9 +135,9 @@ public class FXMLDocumentController implements Initializable {
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     private Pizza p1;
     @FXML
-    private TextField tfBuscar;
-    
-    
+    private Pane paneNotFound;
+    @FXML
+    private Label labelNotFound;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,10 +166,17 @@ public class FXMLDocumentController implements Initializable {
 //        STYLE_CLASS_ARROWS_ON_LEFT_HORIZONTAL
 //        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
 //        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL
-
         //TAB PRECIOS
-        paneTodosIngredientes.setVisible(false);
-        paneBuscarIngrediente.setVisible(false);
+        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/404.gif); -fx-background-size: 207px 200px;");
+        
+        paneJamon.setVisible(false);
+        paneQueso.setVisible(false);
+        paneTomate.setVisible(false);
+        paneCebolla.setVisible(false);
+        paneOlivas.setVisible(false);
+        paneNotFound.setVisible(false);
+        labelNotFound.setVisible(false);
+        
     }
 
     // Nuestros productos
@@ -285,10 +304,10 @@ public class FXMLDocumentController implements Initializable {
             precioTamano = p1.buscarPrecio(tamano) + "";
 
         }
-        if (tamano.equalsIgnoreCase("Mediana")){
+        if (tamano.equalsIgnoreCase("Mediana")) {
             precioTamano = p1.buscarPrecio(tamano) + "";
         }
-        if (tamano.equalsIgnoreCase("Grande")){
+        if (tamano.equalsIgnoreCase("Grande")) {
             precioTamano = p1.buscarPrecio(tamano) + "0";
         }
         StringTokenizer st = new StringTokenizer(precioTamano, ".");
@@ -297,29 +316,79 @@ public class FXMLDocumentController implements Initializable {
             token = st.nextToken();
         }
         precioFinalTamano.setText(token + "%");
-        
+
         precioFinalPedido.setText(p1.calcularPrecio() + "");
     }
 
     @FXML
     private void mostrarTodosPrecios(ActionEvent event) {
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-        
+        p1 = new Pizza(tipoMasa, tipoPizza, tamano);        
+        paneNotFound.setVisible(false);
+        labelNotFound.setVisible(false);
+
         if (botonMostrarTodos.isFocused()) {
-            paneTodosIngredientes.setVisible(true);
-            
+            paneJamon.setVisible(true);
+            paneQueso.setVisible(true);
+            paneTomate.setVisible(true);
+            paneCebolla.setVisible(true);
+            paneOlivas.setVisible(true);
+
             mostrarPrecioJamon.setText(p1.buscarPrecio("Jamon") + "€");
             mostrarPrecioQueso.setText(p1.buscarPrecio("Queso") + "€");
             mostrarPrecioTomate.setText(p1.buscarPrecio("Tomate") + "€");
             mostrarPrecioCebolla.setText(p1.buscarPrecio("Cebolla") + "€");
             mostrarPrecioOlivas.setText(p1.buscarPrecio("Olivas") + "€");
-            
+
         }
     }
 
     @FXML
     private void mostrarPrecioIngrediente(ActionEvent event) {
-        paneTodosIngredientes.setVisible(false);
+        paneJamon.setVisible(false);
+        paneQueso.setVisible(false);
+        paneTomate.setVisible(false);
+        paneCebolla.setVisible(false);
+        paneOlivas.setVisible(false);        
+        paneNotFound.setVisible(false);
+        labelNotFound.setVisible(false);
+        
+        Alert alertaFaltaNombre = new Alert(AlertType.WARNING);
+        alertaFaltaNombre.setTitle("RedHotPizza");
+        alertaFaltaNombre.setHeaderText("Por favor, introduzca el nombre del ingrediente primero.");
+        
+        Alert alertaNoEncontrado = new Alert(AlertType.INFORMATION);
+        alertaNoEncontrado.setTitle("RedHotPizza");
+        alertaNoEncontrado.setHeaderText("Lo sentimos, ingrediente no encontrado.");
+        
+        String ingrediente;
+        
+        ingrediente = tfBuscar.getText();
+        
+        if (ingrediente.isEmpty()) {
+            alertaFaltaNombre.showAndWait();
+            paneNotFound.setVisible(true);
+            labelNotFound.setVisible(true);
+        } else if (ingrediente.equalsIgnoreCase("Jamon") || ingrediente.equalsIgnoreCase("Jamón")){
+            paneJamon.setVisible(true);
+            paneJamon.setStyle("-fx-background-color: rgba(193,8,16,1);");
+        } else if (ingrediente.equalsIgnoreCase("Queso")){
+            paneQueso.setVisible(true);
+            paneQueso.setStyle("-fx-background-color: rgba(193,8,16,1);");
+        } else if (ingrediente.equalsIgnoreCase("Tomate")){
+            paneTomate.setVisible(true);
+            paneTomate.setStyle("-fx-background-color: rgba(193,8,16,1);");
+        } else if (ingrediente.equalsIgnoreCase("Cebolla")){
+            paneCebolla.setVisible(true);
+            paneCebolla.setStyle("-fx-background-color: rgba(193,8,16,1);");
+        } else if (ingrediente.equalsIgnoreCase("Olivas")){
+            paneOlivas.setVisible(true);
+            paneOlivas.setStyle("-fx-background-color: rgba(193,8,16,1);");
+        } else {
+            alertaNoEncontrado.showAndWait();
+            paneNotFound.setVisible(true);
+            labelNotFound.setVisible(true);
+        }
+        
     }
 
 }

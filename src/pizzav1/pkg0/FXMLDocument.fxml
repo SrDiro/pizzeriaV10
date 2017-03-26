@@ -305,10 +305,10 @@
                         <Separator layoutX="21.0" layoutY="61.0" prefHeight="0.0" prefWidth="659.0" />
                         <Pane fx:id="paneTodosIngredientes" layoutX="37.0" layoutY="79.0" prefHeight="310.0" prefWidth="636.0">
                            <children>
-                              <Pane id="paneJamon" layoutX="63.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneJamon" fx:id="paneJamon" layoutX="63.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgJamon" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
-                                    <Label layoutX="11.0" layoutY="-2.0" text="Jamón" textFill="WHITE" underline="true">
+                                    <Label layoutX="11.0" layoutY="1.0" text="Jamón" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="System Bold Italic" size="22.0" />
                                        </font>
@@ -320,10 +320,10 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneQueso" layoutX="273.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneQueso" fx:id="paneQueso" layoutX="273.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgQueso" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
-                                    <Label layoutX="13.0" layoutY="-2.0" text="Queso" textFill="WHITE" underline="true">
+                                    <Label layoutX="13.0" layoutY="1.0" text="Queso" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="System Bold Italic" size="22.0" />
                                        </font>
@@ -335,10 +335,10 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneTomate" layoutX="483.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneTomate" fx:id="paneTomate" layoutX="483.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgTomate" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
-                                    <Label layoutX="6.0" layoutY="-2.0" text="Tomate" textFill="WHITE" underline="true">
+                                    <Label layoutX="6.0" layoutY="1.0" text="Tomate" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="System Bold Italic" size="22.0" />
                                        </font>
@@ -350,10 +350,10 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneCebolla" layoutX="175.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneCebolla" fx:id="paneCebolla" layoutX="175.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgCebolla" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
-                                    <Label layoutX="6.0" layoutY="-2.0" text="Cebolla" textFill="WHITE" underline="true">
+                                    <Label layoutX="6.0" layoutY="1.0" text="Cebolla" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="System Bold Italic" size="22.0" />
                                        </font>
@@ -365,10 +365,10 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneOlivas" layoutX="377.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneOlivas" fx:id="paneOlivas" layoutX="377.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgOlivas" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
-                                    <Label layoutX="12.0" layoutY="-2.0" text="Olivas" textFill="WHITE" underline="true">
+                                    <Label layoutX="12.0" layoutY="1.0" text="Olivas" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="System Bold Italic" size="22.0" />
                                        </font>
@@ -380,6 +380,12 @@
                                     </Label>
                                  </children>
                               </Pane>
+                              <Pane fx:id="paneNotFound" layoutX="215.0" layoutY="55.0" prefHeight="200.0" prefWidth="207.0" />
+                              <Label fx:id="labelNotFound" layoutX="147.0" layoutY="2.0" text="Error 404 Not Found" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold Italic" size="36.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children></AnchorPane>
