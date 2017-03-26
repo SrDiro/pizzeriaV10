@@ -19,6 +19,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -94,7 +95,25 @@ public class FXMLDocumentController implements Initializable {
     private Label precioFinalTamano;
     @FXML
     private Label precioFinalPedido;
-
+    @FXML
+    private Pane paneTodosIngredientes;
+    private Pane paneBuscarIngrediente;
+    @FXML
+    private Button botonMostrarTodos;
+    @FXML
+    private Label mostrarPrecioJamon;
+    @FXML
+    private Label mostrarPrecioQueso;
+    @FXML
+    private Label mostrarPrecioTomate;
+    @FXML
+    private Label mostrarPrecioCebolla;
+    @FXML
+    private Label mostrarPrecioOlivas;
+    @FXML
+    private Button botonBuscarPrecio;
+    
+    
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
@@ -103,6 +122,10 @@ public class FXMLDocumentController implements Initializable {
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     private Pizza p1;
+    @FXML
+    private TextField tfBuscar;
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,7 +153,11 @@ public class FXMLDocumentController implements Initializable {
 //        STYLE_CLASS_ARROWS_ON_LEFT_VERTICAL
 //        STYLE_CLASS_ARROWS_ON_LEFT_HORIZONTAL
 //        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
-//        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL        
+//        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL
+
+        //TAB PRECIOS
+        paneTodosIngredientes.setVisible(false);
+        paneBuscarIngrediente.setVisible(false);
     }
 
     // Nuestros productos
@@ -272,6 +299,27 @@ public class FXMLDocumentController implements Initializable {
         precioFinalTamano.setText(token + "%");
         
         precioFinalPedido.setText(p1.calcularPrecio() + "");
+    }
+
+    @FXML
+    private void mostrarTodosPrecios(ActionEvent event) {
+        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+        
+        if (botonMostrarTodos.isFocused()) {
+            paneTodosIngredientes.setVisible(true);
+            
+            mostrarPrecioJamon.setText(p1.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso.setText(p1.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate.setText(p1.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla.setText(p1.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas.setText(p1.buscarPrecio("Olivas") + "€");
+            
+        }
+    }
+
+    @FXML
+    private void mostrarPrecioIngrediente(ActionEvent event) {
+        paneTodosIngredientes.setVisible(false);
     }
 
 }

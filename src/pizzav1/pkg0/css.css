@@ -1,18 +1,22 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 23-mar-2017, 11:12:13
-    Author     : daw
-*/
+/* ------------------Imagen de fondo------------------ */ 
+
 #fondoTab1, #fondoTab2, #fondoTab3, #fondoTab4{
     -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/cabecera.png);
 }
 
+/* ------------------Nuestros productos------------------ */
+
 #separador1, #separador2, #separador3{
     -fx-background-color: red;
+}
+
+#panePizza1, #panePizza2, #panePizza3{
+    -fx-background-color: rgba(193,8,16,0.3);
+    -fx-background-radius: 15px;
+}
+
+#panePizza1:hover, #panePizza2:hover, #panePizza3:hover{
+    -fx-background-color: rgba(193,8,16,1);
 }
 
 #pane1{
@@ -31,12 +35,23 @@ and open the template in the editor.
     -fx-background-repeat: no-repeat;
 }
 
-#paneMasa, #paneTipoPizza, #paneIngredientes, #paneTamano, #panePedido, #panePizza1, #panePizza2, #panePizza3{
+#finalizarCompra{
+    -fx-background-color: linear-gradient(#c10810 0%, #dc0914 25%, #f6232d 75%, #f8545c 100%);
+}
+
+#finalizarCompra:hover{
+    -fx-background-color: #f73b45;
+}
+
+/* ------------------Pizza al gusto------------------ */
+
+
+#paneMasa, #paneTipoPizza, #paneIngredientes, #paneTamano, #panePedido{
     -fx-background-color: rgba(193,8,16,0.3);
     -fx-background-radius: 15px;
 }
 
-#paneMasa:hover, #paneTipoPizza:hover, #paneIngredientes:hover, #paneTamano:hover, #panePedido:hover, #panePizza1:hover, #panePizza2:hover, #panePizza3:hover{
+#paneMasa:hover, #paneTipoPizza:hover, #paneIngredientes:hover, #paneTamano:hover, #panePedido:hover{
     -fx-background-color: rgba(193,8,16,1);
 }
 
@@ -45,14 +60,6 @@ and open the template in the editor.
     -fx-background-repeat: no-repeat;
 }
 
-/* Nuestros productos */
-#finalizarCompra{
-    -fx-background-color: linear-gradient(#c10810 0%, #dc0914 25%, #f6232d 75%, #f8545c 100%);
-}
-
-#finalizarCompra:hover{
-    -fx-background-color: #f73b45;
-}
 
 /* ESTILO TabPane */
 .tab-pane .tab-header-area .tab-header-background {
@@ -111,3 +118,33 @@ and open the template in the editor.
 
 /* Spinner */
 /* No tiene CSS Property */
+
+/* ------------------Precios------------------ */
+#paneJamon, #paneQueso, #paneTomate, #paneCebolla, #paneOlivas{
+    -fx-background-color: rgba(193,8,16,0.3);
+    -fx-background-radius: 15px;
+}
+
+#paneJamon:hover, #paneQueso:hover, #paneTomate:hover, #paneCebolla:hover, #paneOlivas:hover{
+    -fx-background-color: rgba(193,8,16,1);
+}
+
+#paneImgJamon{
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/jamonIcon.png);
+}
+
+#paneImgQueso{
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/quesoIcon.png);
+}
+
+#paneImgTomate{
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/tomateIcon.png);
+}
+
+#paneImgCebolla{
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/cebollaIcon.png);
+}
+
+#paneImgOlivas{
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/olivasIcon.png);
+}

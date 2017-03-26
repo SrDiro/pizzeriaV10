@@ -299,10 +299,89 @@
                     <content>
                         <AnchorPane fx:id="fondoTab3" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@css.css">
                      <children>
-                        <Button layoutX="620.0" layoutY="28.0" mnemonicParsing="false" text="Buscar" />
-                        <TextField layoutX="458.0" layoutY="28.0" />
-                        <Button layoutX="37.0" layoutY="28.0" mnemonicParsing="false" text="Mostrar todos los ingredientes" />
+                        <Button fx:id="botonBuscarPrecio" layoutX="620.0" layoutY="28.0" mnemonicParsing="false" onAction="#mostrarPrecioIngrediente" text="Buscar" />
+                        <TextField fx:id="tfBuscar" layoutX="458.0" layoutY="28.0" />
+                        <Button fx:id="botonMostrarTodos" layoutX="37.0" layoutY="28.0" mnemonicParsing="false" onAction="#mostrarTodosPrecios" text="Mostrar todos los ingredientes" />
                         <Separator layoutX="21.0" layoutY="61.0" prefHeight="0.0" prefWidth="659.0" />
+                        <Pane fx:id="paneTodosIngredientes" layoutX="37.0" layoutY="79.0" prefHeight="310.0" prefWidth="636.0">
+                           <children>
+                              <Pane id="paneJamon" layoutX="63.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                                 <children>
+                                    <Pane id="paneImgJamon" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
+                                    <Label layoutX="11.0" layoutY="-2.0" text="Jamón" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="precioJamon" fx:id="mostrarPrecioJamon" layoutX="22.0" layoutY="91.0" text="0.00€" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane id="paneQueso" layoutX="273.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                                 <children>
+                                    <Pane id="paneImgQueso" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
+                                    <Label layoutX="13.0" layoutY="-2.0" text="Queso" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="precioJamon" fx:id="mostrarPrecioQueso" layoutX="22.0" layoutY="91.0" text="0.00€" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane id="paneTomate" layoutX="483.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                                 <children>
+                                    <Pane id="paneImgTomate" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
+                                    <Label layoutX="6.0" layoutY="-2.0" text="Tomate" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="precioJamon" fx:id="mostrarPrecioTomate" layoutX="22.0" layoutY="91.0" text="0.00€" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane id="paneCebolla" layoutX="175.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                                 <children>
+                                    <Pane id="paneImgCebolla" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
+                                    <Label layoutX="6.0" layoutY="-2.0" text="Cebolla" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="precioJamon" fx:id="mostrarPrecioCebolla" layoutX="22.0" layoutY="91.0" text="0.00€" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane id="paneOlivas" layoutX="377.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                                 <children>
+                                    <Pane id="paneImgOlivas" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
+                                    <Label layoutX="12.0" layoutY="-2.0" text="Olivas" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="precioJamon" fx:id="mostrarPrecioOlivas" layoutX="22.0" layoutY="91.0" text="0.00€" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
                      </children></AnchorPane>
                     </content>
                 </Tab>
