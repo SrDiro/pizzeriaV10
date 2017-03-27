@@ -39,6 +39,14 @@ public class Pizza {
         this.tamano = tamano;
     }
 
+    public void setMasa(String masa) {
+        this.masa = masa;
+    }
+
+    public void setTipoPizza(String tipoPizza) {
+        this.tipoPizza = tipoPizza;
+    }
+    
     public String getMasa() {
         return masa;
     }
@@ -94,8 +102,8 @@ public class Pizza {
         System.out.println(precioIngredientes);
         precioTamano = buscarPrecio(getTamano());
 
-        total = (precioMasa + precioTipo + precioIngredientes) * precioTamano;
-                
+        total = precioMasa + precioTipo + precioIngredientes;
+       total = total * precioTamano;
         totalFormateado = Math.round(total * 100.0) / 100.0;
         
         return totalFormateado;

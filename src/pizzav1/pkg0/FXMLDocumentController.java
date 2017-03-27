@@ -125,7 +125,11 @@ public class FXMLDocumentController implements Initializable {
     private Pane paneCebolla;
     @FXML
     private Pane paneOlivas;
-
+    @FXML
+    private Pane paneNotFound;
+    @FXML
+    private Label labelNotFound;
+    
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
@@ -133,11 +137,7 @@ public class FXMLDocumentController implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
-    private Pizza p1;
-    @FXML
-    private Pane paneNotFound;
-    @FXML
-    private Label labelNotFound;
+    Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -167,8 +167,8 @@ public class FXMLDocumentController implements Initializable {
 //        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
 //        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL
         //TAB PRECIOS
-        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/404.gif); -fx-background-size: 207px 200px;");
-        
+        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/404.gif); -fx-background-size: 207px 200px;");
+
         paneJamon.setVisible(false);
         paneQueso.setVisible(false);
         paneTomate.setVisible(false);
@@ -176,7 +176,7 @@ public class FXMLDocumentController implements Initializable {
         paneOlivas.setVisible(false);
         paneNotFound.setVisible(false);
         labelNotFound.setVisible(false);
-        
+
     }
 
     // Nuestros productos
@@ -217,7 +217,8 @@ public class FXMLDocumentController implements Initializable {
             labelMasa.setVisible(true);
 
         }
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+        p1.setMasa(tipoMasa);
+        
         precioFinalMasa.setText(p1.buscarPrecio(tipoMasa) + "€");
         precioFinalPedido.setText(p1.calcularPrecio() + "€");
 
@@ -230,7 +231,7 @@ public class FXMLDocumentController implements Initializable {
         labelTipoPizza.setText(tipoPizza);
         labelTipoPizza.setVisible(true);
 
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+        p1.setTipoPizza(tipoPizza);
         precioFinalTipo.setText(p1.buscarPrecio(tipoPizza) + "€");
         precioFinalPedido.setText(p1.calcularPrecio() + "€");
 
@@ -238,11 +239,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void tipoIngredientes(MouseEvent event) {
-        double total = 0.0, precioSin = 0.0, precioJamon = 0.0, precioQueso = 0.0, precioTomate = 0.0, precioCebolla = 0.0, precioOlivas = 0.0;
+        double total, precioSin = 0.0, precioJamon = 0.0, precioQueso = 0.0, precioTomate = 0.0, precioCebolla = 0.0, precioOlivas = 0.0;
         boolean apretado = false;
-
+        
         paneFuego.setVisible(false);
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
         ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
 
         for (String ingrediente : selectedItems) {
@@ -297,9 +297,8 @@ public class FXMLDocumentController implements Initializable {
         tamano = spinnerTamano.getValue();
         labelTamano.setVisible(true);
         labelTamano.setText(tamano);
-
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-
+        
+        p1.setTamano(tamano);        
         if (tamano.equalsIgnoreCase("Pequeña")) {
             precioTamano = p1.buscarPrecio(tamano) + "";
 
@@ -322,7 +321,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void mostrarTodosPrecios(ActionEvent event) {
-        p1 = new Pizza(tipoMasa, tipoPizza, tamano);        
         paneNotFound.setVisible(false);
         labelNotFound.setVisible(false);
 
@@ -348,39 +346,44 @@ public class FXMLDocumentController implements Initializable {
         paneQueso.setVisible(false);
         paneTomate.setVisible(false);
         paneCebolla.setVisible(false);
-        paneOlivas.setVisible(false);        
+        paneOlivas.setVisible(false);
         paneNotFound.setVisible(false);
         labelNotFound.setVisible(false);
-        
+
         Alert alertaFaltaNombre = new Alert(AlertType.WARNING);
         alertaFaltaNombre.setTitle("RedHotPizza");
         alertaFaltaNombre.setHeaderText("Por favor, introduzca el nombre del ingrediente primero.");
-        
+
         Alert alertaNoEncontrado = new Alert(AlertType.INFORMATION);
         alertaNoEncontrado.setTitle("RedHotPizza");
         alertaNoEncontrado.setHeaderText("Lo sentimos, ingrediente no encontrado.");
-        
+
         String ingrediente;
-        
+
         ingrediente = tfBuscar.getText();
-        
+
         if (ingrediente.isEmpty()) {
             alertaFaltaNombre.showAndWait();
             paneNotFound.setVisible(true);
             labelNotFound.setVisible(true);
-        } else if (ingrediente.equalsIgnoreCase("Jamon") || ingrediente.equalsIgnoreCase("Jamón")){
+        } else if (ingrediente.equalsIgnoreCase("Jamon") || ingrediente.equalsIgnoreCase("Jamón")) {
+            mostrarPrecioJamon.setText(p1.buscarPrecio("Jamon") + "€");
             paneJamon.setVisible(true);
             paneJamon.setStyle("-fx-background-color: rgba(193,8,16,1);");
-        } else if (ingrediente.equalsIgnoreCase("Queso")){
+        } else if (ingrediente.equalsIgnoreCase("Queso")) {
+            mostrarPrecioQueso.setText(p1.buscarPrecio("Queso") + "€");
             paneQueso.setVisible(true);
             paneQueso.setStyle("-fx-background-color: rgba(193,8,16,1);");
-        } else if (ingrediente.equalsIgnoreCase("Tomate")){
+        } else if (ingrediente.equalsIgnoreCase("Tomate")) {
+            mostrarPrecioTomate.setText(p1.buscarPrecio("Tomate") + "€");
             paneTomate.setVisible(true);
             paneTomate.setStyle("-fx-background-color: rgba(193,8,16,1);");
-        } else if (ingrediente.equalsIgnoreCase("Cebolla")){
+        } else if (ingrediente.equalsIgnoreCase("Cebolla")) {
+            mostrarPrecioCebolla.setText(p1.buscarPrecio("Cebolla") + "€");
             paneCebolla.setVisible(true);
             paneCebolla.setStyle("-fx-background-color: rgba(193,8,16,1);");
-        } else if (ingrediente.equalsIgnoreCase("Olivas")){
+        } else if (ingrediente.equalsIgnoreCase("Olivas")) {
+            mostrarPrecioOlivas.setText(p1.buscarPrecio("Olivas") + "€");
             paneOlivas.setVisible(true);
             paneOlivas.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else {
@@ -388,7 +391,7 @@ public class FXMLDocumentController implements Initializable {
             paneNotFound.setVisible(true);
             labelNotFound.setVisible(true);
         }
-        
+
     }
 
 }
