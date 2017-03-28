@@ -1,7 +1,7 @@
 /* ------------------Imagen de fondo------------------ */ 
 
 #fondoTab1, #fondoTab2, #fondoTab3, #fondoTab4{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cabecera.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/cabecera.png);
 }
 
 /* ------------------Nuestros productos------------------ */
@@ -10,27 +10,27 @@
     -fx-background-color: red;
 }
 
-#panePizza1, #panePizza2, #panePizza3{
+#panePizza1, #panePizza2, #panePizza3, #paneLogin{
     -fx-background-color: rgba(193,8,16,0.3);
     -fx-background-radius: 15px;
 }
 
-#panePizza1:hover, #panePizza2:hover, #panePizza3:hover{
+#panePizza1:hover, #panePizza2:hover, #panePizza3:hover, #paneLogin:hover{
     -fx-background-color: rgba(193,8,16,1);
 }
 
 #pane1{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/pizzaCuatroQuesos.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/pizzaCuatroQuesos.png);
     -fx-background-size: 95px 75px;
     -fx-background-repeat: no-repeat;
 }
 #pane2{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/pizzaBbq.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/pizzaBbq.png);
     -fx-background-size: 95px 75px;
     -fx-background-repeat: no-repeat;
 }
 #pane3{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/pizzaMargarita.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/pizzaMargarita.png);
     -fx-background-size: 95px 75px;
     -fx-background-repeat: no-repeat;
 }
@@ -56,7 +56,7 @@
 }
 
 #paneFuego{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/picante4.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/picante4.png);
     -fx-background-repeat: no-repeat;
 }
 
@@ -126,21 +126,31 @@
 }
 
 #paneImgJamon{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/jamonIcon.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/jamonIcon.png);
 }
 
 #paneImgQueso{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/quesoIcon.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/quesoIcon.png);
 }
 
 #paneImgTomate{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/tomateIcon.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/tomateIcon.png);
 }
 
 #paneImgCebolla{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/cebollaIcon.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/cebollaIcon.png);
 }
 
 #paneImgOlivas{
-    -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/olivasIcon.png);
+    -fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/olivasIcon.png);
+}
+
+/* ------------------Administracion------------------ */
+
+#botonLogin, #botonAplicarCambios, #botonCerrarSesion {
+    -fx-background-color: linear-gradient(#c10810 0%, #dc0914 25%, #f6232d 75%, #f8545c 100%);
+}
+
+#botonLogin:hover, #botonAplicarCambios:hover, #botonCerrarSesion:hover{
+    -fx-background-color: #f73b45;
 }

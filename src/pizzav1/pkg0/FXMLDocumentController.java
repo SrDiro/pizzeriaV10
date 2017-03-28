@@ -169,7 +169,13 @@ public class FXMLDocumentController implements Initializable {
     private TextField precioCambiarCebolla;
     @FXML
     private TextField precioCambiarOlivas;
-
+    @FXML
+    private Button botonAplicarCambios;
+    @FXML
+    private TextField precioCambiarJamon;
+    @FXML
+    private Button botonCerrarSesion;
+    
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
@@ -178,12 +184,7 @@ public class FXMLDocumentController implements Initializable {
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-    @FXML
-    private Button botonAplicarCambios;
-    @FXML
-    private TextField precioCambiarJamon;
-    @FXML
-    private Button botonCerrarSesion;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -213,7 +214,7 @@ public class FXMLDocumentController implements Initializable {
 //        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
 //        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL
         //TAB PRECIOS
-        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/404.gif); -fx-background-size: 207px 200px;");
+        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/404.gif); -fx-background-size: 207px 200px;");
 
         paneJamon.setVisible(false);
         paneQueso.setVisible(false);
