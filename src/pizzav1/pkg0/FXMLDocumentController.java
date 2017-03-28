@@ -15,6 +15,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
@@ -129,6 +131,17 @@ public class FXMLDocumentController implements Initializable {
     private Pane paneNotFound;
     @FXML
     private Label labelNotFound;
+    @FXML
+    private Pane paneLogin;
+    @FXML
+    private PasswordField fieldContrasenya;
+    @FXML
+    private TextField fieldUsuario;
+    @FXML
+    private Button botonLogin;
+    @FXML
+    private Pane paneCambiarPrecio;
+    
     
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
@@ -138,7 +151,9 @@ public class FXMLDocumentController implements Initializable {
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbTipoPizza.setItems(listaTipoPizzas);
@@ -176,6 +191,9 @@ public class FXMLDocumentController implements Initializable {
         paneOlivas.setVisible(false);
         paneNotFound.setVisible(false);
         labelNotFound.setVisible(false);
+        
+        //Administracion
+        paneCambiarPrecio.setVisible(false);
 
     }
 
@@ -392,6 +410,53 @@ public class FXMLDocumentController implements Initializable {
             labelNotFound.setVisible(true);
         }
 
+    }
+
+    @FXML
+    private void loginAdministracion(ActionEvent event) {
+        Alert alertaFaltaNombre = new Alert(AlertType.WARNING);
+        alertaFaltaNombre.setTitle("RedHotPizza");
+        alertaFaltaNombre.setHeaderText("Por favor, introduzca el nombre/usuario primero.");
+
+        Alert alertaNoEncontrado = new Alert(AlertType.INFORMATION);
+        alertaNoEncontrado.setTitle("RedHotPizza");
+        alertaNoEncontrado.setHeaderText("Lo sentimos, nombre/usuario incorrecto.");
+        
+        
+        
+        boolean usuario = false, contrasenya = false, mostrado = false;
+        String user, pass;
+        
+        user = fieldUsuario.getText();
+        pass = fieldContrasenya.getText();
+        
+        if (botonLogin.isFocused()) {
+            if (user.equals("admin")) {
+                usuario = true;
+            } else if (user.isEmpty()){
+                mostrado = true;
+                alertaFaltaNombre.showAndWait();                
+            } else if (!mostrado){
+                alertaNoEncontrado.showAndWait();
+            }
+            
+            if(pass.equals("admin")){
+                contrasenya = true;
+            } else if (pass.isEmpty() && !mostrado){
+                alertaFaltaNombre.showAndWait();
+            } else if (!mostrado){
+                alertaNoEncontrado.showAndWait();
+            }
+                
+            if (usuario && contrasenya) {
+                paneLogin.setVisible(false);
+                paneCambiarPrecio.setVisible(true);
+            }
+            
+        }
+        
+        
+        
     }
 
 }

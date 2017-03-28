@@ -24,11 +24,11 @@
     -fx-background-size: 95px 75px;
     -fx-background-repeat: no-repeat;
 }
-/*#pane2{
+#pane2{
     -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/pizzaBbq.png);
     -fx-background-size: 95px 75px;
     -fx-background-repeat: no-repeat;
-}*/
+}
 #pane3{
     -fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/pizzaMargarita.png);
     -fx-background-size: 95px 75px;
