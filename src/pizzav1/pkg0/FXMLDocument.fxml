@@ -418,7 +418,7 @@
                               <Button fx:id="botonLogin" layoutX="261.0" layoutY="100.0" mnemonicParsing="false" onAction="#loginAdministracion" text="Login" />
                            </children>
                         </Pane>
-                        <Pane fx:id="paneCambiarPrecio" layoutX="33.0" layoutY="50.0" prefHeight="310.0" prefWidth="636.0">
+                        <Pane fx:id="paneCambiarPrecio" layoutX="33.0" layoutY="26.0" prefHeight="379.0" prefWidth="636.0">
                            <children>
                               <Pane id="paneJamon" fx:id="paneJamon1" layoutX="63.0" layoutY="14.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
@@ -465,7 +465,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneCebolla" fx:id="paneCebolla1" layoutX="175.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneCebolla" fx:id="paneCebolla1" layoutX="170.0" layoutY="181.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgCebolla" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
                                     <Label layoutX="6.0" layoutY="1.0" text="Cebolla" textFill="WHITE" underline="true">
@@ -480,7 +480,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane id="paneOlivas" fx:id="paneOlivas1" layoutX="377.0" layoutY="155.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
+                              <Pane id="paneOlivas" fx:id="paneOlivas1" layoutX="376.0" layoutY="181.0" prefHeight="125.0" prefWidth="90.0" stylesheets="@css.css">
                                  <children>
                                     <Pane id="paneImgOlivas" layoutX="18.0" layoutY="33.0" prefHeight="54.0" prefWidth="54.0" stylesheets="@css.css" />
                                     <Label layoutX="12.0" layoutY="1.0" text="Olivas" textFill="WHITE" underline="true">
@@ -495,6 +495,13 @@
                                     </Label>
                                  </children>
                               </Pane>
+                              <TextField fx:id="precioCambiarJamon" layoutX="84.0" layoutY="139.0" prefHeight="25.0" prefWidth="49.0" />
+                              <TextField fx:id="precioCambiarQueso" layoutX="294.0" layoutY="139.0" prefHeight="25.0" prefWidth="49.0" />
+                              <TextField fx:id="precioCambiarTomate" layoutX="504.0" layoutY="139.0" prefHeight="25.0" prefWidth="49.0" />
+                              <TextField fx:id="precioCambiarCebolla" layoutX="190.0" layoutY="306.0" prefHeight="25.0" prefWidth="49.0" />
+                              <TextField fx:id="precioCambiarOlivas" layoutX="396.0" layoutY="306.0" prefHeight="25.0" prefWidth="49.0" />
+                              <Button fx:id="botonAplicarCambios" layoutX="268.0" layoutY="177.0" mnemonicParsing="false" onAction="#aplicarCambios" text="Aplicar cambios" />
+                              <Button fx:id="botonCerrarSesion" layoutX="276.0" layoutY="231.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
                            </children>
                         </Pane>
                      </children></AnchorPane>

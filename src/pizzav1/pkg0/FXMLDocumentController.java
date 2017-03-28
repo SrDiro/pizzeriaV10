@@ -141,8 +141,35 @@ public class FXMLDocumentController implements Initializable {
     private Button botonLogin;
     @FXML
     private Pane paneCambiarPrecio;
-    
-    
+    @FXML
+    private Pane paneJamon1;
+    @FXML
+    private Label mostrarPrecioJamon1;
+    @FXML
+    private Pane paneQueso1;
+    @FXML
+    private Label mostrarPrecioQueso1;
+    @FXML
+    private Pane paneTomate1;
+    @FXML
+    private Label mostrarPrecioTomate1;
+    @FXML
+    private Pane paneCebolla1;
+    @FXML
+    private Label mostrarPrecioCebolla1;
+    @FXML
+    private Pane paneOlivas1;
+    @FXML
+    private Label mostrarPrecioOlivas1;
+    @FXML
+    private TextField precioCambiarQueso;
+    @FXML
+    private TextField precioCambiarTomate;
+    @FXML
+    private TextField precioCambiarCebolla;
+    @FXML
+    private TextField precioCambiarOlivas;
+
     //MIS ATRIBUTOS    
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
@@ -151,9 +178,13 @@ public class FXMLDocumentController implements Initializable {
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-    
-    
-    
+    @FXML
+    private Button botonAplicarCambios;
+    @FXML
+    private TextField precioCambiarJamon;
+    @FXML
+    private Button botonCerrarSesion;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbTipoPizza.setItems(listaTipoPizzas);
@@ -191,7 +222,7 @@ public class FXMLDocumentController implements Initializable {
         paneOlivas.setVisible(false);
         paneNotFound.setVisible(false);
         labelNotFound.setVisible(false);
-        
+
         //Administracion
         paneCambiarPrecio.setVisible(false);
 
@@ -236,7 +267,7 @@ public class FXMLDocumentController implements Initializable {
 
         }
         p1.setMasa(tipoMasa);
-        
+
         precioFinalMasa.setText(p1.buscarPrecio(tipoMasa) + "€");
         precioFinalPedido.setText(p1.calcularPrecio() + "€");
 
@@ -259,7 +290,7 @@ public class FXMLDocumentController implements Initializable {
     private void tipoIngredientes(MouseEvent event) {
         double total, precioSin = 0.0, precioJamon = 0.0, precioQueso = 0.0, precioTomate = 0.0, precioCebolla = 0.0, precioOlivas = 0.0;
         boolean apretado = false;
-        
+
         paneFuego.setVisible(false);
         ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
 
@@ -315,8 +346,8 @@ public class FXMLDocumentController implements Initializable {
         tamano = spinnerTamano.getValue();
         labelTamano.setVisible(true);
         labelTamano.setText(tamano);
-        
-        p1.setTamano(tamano);        
+
+        p1.setTamano(tamano);
         if (tamano.equalsIgnoreCase("Pequeña")) {
             precioTamano = p1.buscarPrecio(tamano) + "";
 
@@ -421,42 +452,124 @@ public class FXMLDocumentController implements Initializable {
         Alert alertaNoEncontrado = new Alert(AlertType.INFORMATION);
         alertaNoEncontrado.setTitle("RedHotPizza");
         alertaNoEncontrado.setHeaderText("Lo sentimos, nombre/usuario incorrecto.");
-        
-        
-        
+
         boolean usuario = false, contrasenya = false, mostrado = false;
         String user, pass;
-        
+
         user = fieldUsuario.getText();
         pass = fieldContrasenya.getText();
-        
+
         if (botonLogin.isFocused()) {
+
+            mostrarPrecioJamon1.setText(p1.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso1.setText(p1.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate1.setText(p1.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla1.setText(p1.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas1.setText(p1.buscarPrecio("Olivas") + "€");
+
             if (user.equals("admin")) {
                 usuario = true;
-            } else if (user.isEmpty()){
+            } else if (user.isEmpty()) {
                 mostrado = true;
-                alertaFaltaNombre.showAndWait();                
-            } else if (!mostrado){
-                alertaNoEncontrado.showAndWait();
-            }
-            
-            if(pass.equals("admin")){
-                contrasenya = true;
-            } else if (pass.isEmpty() && !mostrado){
                 alertaFaltaNombre.showAndWait();
-            } else if (!mostrado){
+            } else if (!mostrado) {
                 alertaNoEncontrado.showAndWait();
             }
-                
+
+            if (pass.equals("admin")) {
+                contrasenya = true;
+            } else if (pass.isEmpty() && !mostrado) {
+                alertaFaltaNombre.showAndWait();
+            } else if (!mostrado) {
+                alertaNoEncontrado.showAndWait();
+            }
+
             if (usuario && contrasenya) {
                 paneLogin.setVisible(false);
                 paneCambiarPrecio.setVisible(true);
             }
-            
+
         }
-        
-        
-        
+
+    }
+
+    @FXML
+    private void aplicarCambios(ActionEvent event) {
+
+        double precioJ = -1, precioQ = -1, precioT = -1, precioC = -1, precioO = -1;
+        String precioJamon, precioQueso, precioTomate, precioCebolla, precioOlivas;
+
+        precioJamon = precioCambiarJamon.getText();
+        precioQueso = precioCambiarQueso.getText();
+        precioTomate = precioCambiarTomate.getText();
+        precioCebolla = precioCambiarCebolla.getText();
+        precioOlivas = precioCambiarOlivas.getText();
+
+        System.out.println(precioJamon);
+
+        if (!precioJamon.isEmpty()) {
+            precioJ = Double.parseDouble(precioCambiarJamon.getText());
+        }
+
+        if (!precioTomate.isEmpty()) {
+            precioT = Double.parseDouble(precioCambiarTomate.getText());
+        }
+
+        if (!precioQueso.isEmpty()) {
+            precioQ = Double.parseDouble(precioCambiarQueso.getText());
+        }
+
+        if (!precioCebolla.isEmpty()) {
+            precioC = Double.parseDouble(precioCambiarCebolla.getText());
+        }
+
+        if (!precioOlivas.isEmpty()) {
+            precioC = Double.parseDouble(precioCambiarOlivas.getText());
+        }
+
+        if (botonAplicarCambios.isFocused()) {
+
+            if (precioJ >= 0.0) {
+                p1.modificarPrecios("Jamon", precioJ);
+            }
+            if (precioQ >= 0.0) {
+                p1.modificarPrecios("Queso", precioQ);
+            }
+            if (precioT >= 0.0) {
+                p1.modificarPrecios("Tomate", precioT);
+            }
+            if (precioC >= 0.0) {
+                p1.modificarPrecios("Cebolla", precioC);
+            }
+            if (precioO >= 0.0) {
+                p1.modificarPrecios("Olivas", precioO);
+            }
+
+        }
+
+        precioCambiarJamon.setText("");
+        precioCambiarCebolla.setText("");
+        precioCambiarTomate.setText("");
+        precioCambiarCebolla.setText("");
+        precioCambiarOlivas.setText("");
+
+        mostrarPrecioJamon1.setText(p1.buscarPrecio("Jamon") + "€");
+        mostrarPrecioQueso1.setText(p1.buscarPrecio("Queso") + "€");
+        mostrarPrecioTomate1.setText(p1.buscarPrecio("Tomate") + "€");
+        mostrarPrecioCebolla1.setText(p1.buscarPrecio("Cebolla") + "€");
+        mostrarPrecioOlivas1.setText(p1.buscarPrecio("Olivas") + "€");
+
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) {
+
+        if (botonCerrarSesion.isFocused()) {
+            paneLogin.setVisible(true);
+            paneCambiarPrecio.setVisible(false);
+            fieldUsuario.setText("");
+            fieldContrasenya.setText("");
+        }
     }
 
 }
