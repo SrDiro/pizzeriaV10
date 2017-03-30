@@ -1,9 +1,9 @@
 package pizzav1.pkg0;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Pizza {
 
@@ -11,10 +11,10 @@ public class Pizza {
     private String tipoPizza = "";
     private String tamano = "";
 
-    public Map<String, Double> preciosExtra = new HashMap<>();
-    private static final Map<String, Double> precios = new HashMap<>();
+    private final Set<String> preciosExtra = new HashSet<>(); // Llevar a clase precio
+    private final Map<String, Double> precios = new HashMap<>(); //Llecar a clase precio
 
-    static {
+    {
         precios.put("Normal", 9.0);
         precios.put("Integral", 9.50);
         precios.put("Basica", 3.0);
@@ -39,6 +39,9 @@ public class Pizza {
         this.tamano = tamano;
     }
 
+    public Pizza() {
+    }
+
     public void setMasa(String masa) {
         this.masa = masa;
     }
@@ -46,7 +49,7 @@ public class Pizza {
     public void setTipoPizza(String tipoPizza) {
         this.tipoPizza = tipoPizza;
     }
-    
+
     public String getMasa() {
         return masa;
     }
@@ -63,29 +66,25 @@ public class Pizza {
         this.tamano = tamano;
     }
 
-    public void modificarPrecios(String nombre, double cantidad) {
+    public void modificarPrecios(String nombre, double cantidad) { // Llevar a clase precio
         precios.computeIfPresent(nombre, (k, v) -> cantidad);
     }
 
-    public double buscarPrecio(String nombre) {
-        double precio = 0.0;
+    public double buscarPrecio(String nombre) { // Llevar a clase precio
+        double precio;
 
-        for (String nombres : precios.keySet()) {
-            if (nombres.equalsIgnoreCase(nombre)) {
-                precio = precios.get(nombres);
-            }
+        precio = precios.get(nombre);
 
-        }
         return precio;
     }
 
-    public double calcularPrecio() {
+    public double calcularPrecio() { // Se queda aqui
 
         //ATRIBUTOS
         double total = 0.0, precioMasa = 0.0, precioTipo = 0.0, precioIngredientes = 0.0, precioTamano = 1.0, totalFormateado = 0.0;
 
         //CALCULO PRECIO TIPO MASA
-        precioMasa = buscarPrecio(getMasa());
+        precioMasa = buscarPrecio(masa);
 
         //CALCULO PRECIO TIPO DE PIZZA
         precioTipo = buscarPrecio(getTipoPizza());
@@ -94,7 +93,7 @@ public class Pizza {
         double precio;
         for (String ingrediente : preciosExtra.keySet()) {
             precio = preciosExtra.get(ingrediente);
-            precioIngredientes = precioIngredientes + precio;            
+            precioIngredientes = precioIngredientes + precio;
         }
 
         //CALCULO PRECIO TAMAÑO
@@ -103,9 +102,9 @@ public class Pizza {
         precioTamano = buscarPrecio(getTamano());
 
         total = precioMasa + precioTipo + precioIngredientes;
-       total = total * precioTamano;
+        total = total * precioTamano;
         totalFormateado = Math.round(total * 100.0) / 100.0;
-        
+
         return totalFormateado;
     }
 
@@ -118,7 +117,7 @@ public class Pizza {
     public String ingredientes() {
         String cadena = "", jamon = "", queso = "", tomate = "", cebolla = "", olivas = "";
         for (String ingrediente : preciosExtra.keySet()) {
-            
+
             if (ingrediente.equals("Jamon")) {
                 jamon = "Jamón, ";
             }
@@ -135,12 +134,10 @@ public class Pizza {
                 olivas = "Olivas";
             }
         }
-        
+
         cadena = jamon + queso + tomate + cebolla + olivas;
-        
+
         return cadena;
     }
-    
-    
 
 }
