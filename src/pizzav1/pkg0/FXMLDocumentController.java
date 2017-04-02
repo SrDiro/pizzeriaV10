@@ -1,5 +1,6 @@
 package pizzav1.pkg0;
 
+import modelo.Pizza;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
@@ -28,6 +29,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import modelo.Precios;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -184,6 +186,7 @@ public class FXMLDocumentController implements Initializable {
 
     String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
     Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
+    Precios p = new Precios();
     
 
     @Override
@@ -214,7 +217,7 @@ public class FXMLDocumentController implements Initializable {
 //        STYLE_CLASS_SPLIT_ARROWS_VERTICAL
 //        STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL
         //TAB PRECIOS
-        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/daw/Documents/NetBeansProjects/pizzaV1.0/img/404.gif); -fx-background-size: 207px 200px;");
+        paneNotFound.setStyle("-fx-background-image: url(file:///C:/Users/Rasul/Documents/NetBeansProjects/pizzeriaV10/img/404.gif); -fx-background-size: 207px 200px;");
 
         paneJamon.setVisible(false);
         paneQueso.setVisible(false);
@@ -269,7 +272,7 @@ public class FXMLDocumentController implements Initializable {
         }
         p1.setMasa(tipoMasa);
 
-        precioFinalMasa.setText(p1.buscarPrecio(tipoMasa) + "€");
+        precioFinalMasa.setText(p.buscarPrecio(tipoMasa) + "€");
         precioFinalPedido.setText(p1.calcularPrecio() + "€");
 
     }
@@ -282,7 +285,7 @@ public class FXMLDocumentController implements Initializable {
         labelTipoPizza.setVisible(true);
 
         p1.setTipoPizza(tipoPizza);
-        precioFinalTipo.setText(p1.buscarPrecio(tipoPizza) + "€");
+        precioFinalTipo.setText(p.buscarPrecio(tipoPizza) + "€");
         precioFinalPedido.setText(p1.calcularPrecio() + "€");
 
     }
@@ -296,25 +299,25 @@ public class FXMLDocumentController implements Initializable {
         ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
 
         for (String ingrediente : selectedItems) {
-            p1.preciosExtra.put(ingrediente, p1.buscarPrecio(ingrediente));
+            p.setPreciosExtra(ingrediente);
             if (ingrediente.equals("Sin extra")) {
-                precioSin = p1.buscarPrecio(ingrediente);
+                precioSin = p.buscarPrecio(ingrediente);
                 apretado = true;
             }
             if (ingrediente.equals("Jamon")) {
-                precioJamon = p1.buscarPrecio(ingrediente);
+                precioJamon = p.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Queso")) {
-                precioQueso = p1.buscarPrecio(ingrediente);
+                precioQueso = p.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Tomate")) {
-                precioTomate = p1.buscarPrecio(ingrediente);
+                precioTomate = p.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Cebolla")) {
-                precioCebolla = p1.buscarPrecio(ingrediente);
+                precioCebolla = p.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Olivas")) {
-                precioOlivas = p1.buscarPrecio(ingrediente);
+                precioOlivas = p.buscarPrecio(ingrediente);
             }
 
             if (ingrediente.equalsIgnoreCase("Picante")) {
@@ -350,14 +353,14 @@ public class FXMLDocumentController implements Initializable {
 
         p1.setTamano(tamano);
         if (tamano.equalsIgnoreCase("Pequeña")) {
-            precioTamano = p1.buscarPrecio(tamano) + "";
+            precioTamano = p.buscarPrecio(tamano) + "";
 
         }
         if (tamano.equalsIgnoreCase("Mediana")) {
-            precioTamano = p1.buscarPrecio(tamano) + "";
+            precioTamano = p.buscarPrecio(tamano) + "";
         }
         if (tamano.equalsIgnoreCase("Grande")) {
-            precioTamano = p1.buscarPrecio(tamano) + "0";
+            precioTamano = p.buscarPrecio(tamano) + "0";
         }
         StringTokenizer st = new StringTokenizer(precioTamano, ".");
 
@@ -381,11 +384,11 @@ public class FXMLDocumentController implements Initializable {
             paneCebolla.setVisible(true);
             paneOlivas.setVisible(true);
 
-            mostrarPrecioJamon.setText(p1.buscarPrecio("Jamon") + "€");
-            mostrarPrecioQueso.setText(p1.buscarPrecio("Queso") + "€");
-            mostrarPrecioTomate.setText(p1.buscarPrecio("Tomate") + "€");
-            mostrarPrecioCebolla.setText(p1.buscarPrecio("Cebolla") + "€");
-            mostrarPrecioOlivas.setText(p1.buscarPrecio("Olivas") + "€");
+            mostrarPrecioJamon.setText(p.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso.setText(p.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate.setText(p.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla.setText(p.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas.setText(p.buscarPrecio("Olivas") + "€");
 
         }
     }
@@ -417,23 +420,23 @@ public class FXMLDocumentController implements Initializable {
             paneNotFound.setVisible(true);
             labelNotFound.setVisible(true);
         } else if (ingrediente.equalsIgnoreCase("Jamon") || ingrediente.equalsIgnoreCase("Jamón")) {
-            mostrarPrecioJamon.setText(p1.buscarPrecio("Jamon") + "€");
+            mostrarPrecioJamon.setText(p.buscarPrecio("Jamon") + "€");
             paneJamon.setVisible(true);
             paneJamon.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Queso")) {
-            mostrarPrecioQueso.setText(p1.buscarPrecio("Queso") + "€");
+            mostrarPrecioQueso.setText(p.buscarPrecio("Queso") + "€");
             paneQueso.setVisible(true);
             paneQueso.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Tomate")) {
-            mostrarPrecioTomate.setText(p1.buscarPrecio("Tomate") + "€");
+            mostrarPrecioTomate.setText(p.buscarPrecio("Tomate") + "€");
             paneTomate.setVisible(true);
             paneTomate.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Cebolla")) {
-            mostrarPrecioCebolla.setText(p1.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioCebolla.setText(p.buscarPrecio("Cebolla") + "€");
             paneCebolla.setVisible(true);
             paneCebolla.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Olivas")) {
-            mostrarPrecioOlivas.setText(p1.buscarPrecio("Olivas") + "€");
+            mostrarPrecioOlivas.setText(p.buscarPrecio("Olivas") + "€");
             paneOlivas.setVisible(true);
             paneOlivas.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else {
@@ -462,11 +465,11 @@ public class FXMLDocumentController implements Initializable {
 
         if (botonLogin.isFocused()) {
 
-            mostrarPrecioJamon1.setText(p1.buscarPrecio("Jamon") + "€");
-            mostrarPrecioQueso1.setText(p1.buscarPrecio("Queso") + "€");
-            mostrarPrecioTomate1.setText(p1.buscarPrecio("Tomate") + "€");
-            mostrarPrecioCebolla1.setText(p1.buscarPrecio("Cebolla") + "€");
-            mostrarPrecioOlivas1.setText(p1.buscarPrecio("Olivas") + "€");
+            mostrarPrecioJamon1.setText(p.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso1.setText(p.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate1.setText(p.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla1.setText(p.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas1.setText(p.buscarPrecio("Olivas") + "€");
 
             if (user.equals("admin")) {
                 usuario = true;
@@ -531,19 +534,19 @@ public class FXMLDocumentController implements Initializable {
         if (botonAplicarCambios.isFocused()) {
 
             if (precioJ >= 0.0) {
-                p1.modificarPrecios("Jamon", precioJ);
+                p.modificarPrecios("Jamon", precioJ);
             }
             if (precioQ >= 0.0) {
-                p1.modificarPrecios("Queso", precioQ);
+                p.modificarPrecios("Queso", precioQ);
             }
             if (precioT >= 0.0) {
-                p1.modificarPrecios("Tomate", precioT);
+                p.modificarPrecios("Tomate", precioT);
             }
             if (precioC >= 0.0) {
-                p1.modificarPrecios("Cebolla", precioC);
+                p.modificarPrecios("Cebolla", precioC);
             }
             if (precioO >= 0.0) {
-                p1.modificarPrecios("Olivas", precioO);
+                p.modificarPrecios("Olivas", precioO);
             }
 
         }
@@ -554,11 +557,11 @@ public class FXMLDocumentController implements Initializable {
         precioCambiarCebolla.setText("");
         precioCambiarOlivas.setText("");
 
-        mostrarPrecioJamon1.setText(p1.buscarPrecio("Jamon") + "€");
-        mostrarPrecioQueso1.setText(p1.buscarPrecio("Queso") + "€");
-        mostrarPrecioTomate1.setText(p1.buscarPrecio("Tomate") + "€");
-        mostrarPrecioCebolla1.setText(p1.buscarPrecio("Cebolla") + "€");
-        mostrarPrecioOlivas1.setText(p1.buscarPrecio("Olivas") + "€");
+        mostrarPrecioJamon1.setText(p.buscarPrecio("Jamon") + "€");
+        mostrarPrecioQueso1.setText(p.buscarPrecio("Queso") + "€");
+        mostrarPrecioTomate1.setText(p.buscarPrecio("Tomate") + "€");
+        mostrarPrecioCebolla1.setText(p.buscarPrecio("Cebolla") + "€");
+        mostrarPrecioOlivas1.setText(p.buscarPrecio("Olivas") + "€");
 
     }
 
