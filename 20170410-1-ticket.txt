@@ -1,0 +1,9 @@
+MASA --> Normal: 9.0€
+TIPO DE PIZZA --> Cuatro Quesos: 5.0€
+TAMAÑO PIZZA --> Pequeña: 1.0%
+INGREDITENES
+QUESO: 0.75€
+JAMON: 0.5€
+----------------------
+PRECIO TOTAL: 15.25€
+¡Gracias por su compra!

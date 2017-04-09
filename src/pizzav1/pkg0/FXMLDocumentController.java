@@ -585,7 +585,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void generarTicket(ActionEvent event) throws IOException {
-        
+        Pizza p = new Pizza(tipoMasa, tipoPizza, tamano);
         pizza.generarTicket();
         
     }

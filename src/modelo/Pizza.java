@@ -1,11 +1,18 @@
 package modelo;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -25,10 +32,10 @@ public class Pizza {
         this.masa = masa;
         this.tipoPizza = tipoPizza;
         this.tamano = tamano;
+        contador++;
     }
 
     public Pizza() {
-        contador++;
     }
 
     public void setMasa(String masa) {
@@ -105,16 +112,25 @@ public class Pizza {
     public void generarTicket() throws IOException {
         LocalDate date = LocalDate.now();
         String formato;
+        String texto = "";
+        String textoIngredinetes = "";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'-'");
         formato = date.format(formatter);
         formato += contador;
 
-        try {
-            Path path = Paths.get(formato + "ticket.txt");
-            Files.createFile(path);
-        } catch (FileAlreadyExistsException e) {
-            System.err.println("already exists: " + e.getMessage());
+        for (String ingredientes : preciosExtra) {
+            textoIngredinetes += ingredientes.toUpperCase() + ": " + precios.buscarPrecio(ingredientes) + "€\n";
+        }
+
+        texto += "MASA --> " + this.masa + ": " + precios.buscarPrecio(this.masa) + "€"
+                + "\nTIPO DE PIZZA --> " + this.tipoPizza + ": " + precios.buscarPrecio(this.tipoPizza) + "€"
+                + "\nTAMAÑO PIZZA --> " + this.tamano + ": " + precios.buscarPrecio(this.tamano) + "%"
+                + "\nINGREDITENES\n" + textoIngredinetes;
+
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(formato + "-ticket.txt"), "utf-8"))) {
+            writer.write(texto + "----------------------\nPRECIO TOTAL: " + this.calcularPrecio() + "€\n¡Gracias por su compra!");
         }
 
     }
