@@ -1,17 +1,16 @@
 package modelo;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Pizza {
     
-    Precios p1 = new Precios();
+    Precios precios = new Precios();
     
-    private String masa = "";
-    private String tipoPizza = "";
-    private String tamano = "";
+    private String masa;
+    private String tipoPizza;
+    private String tamano;
+    public final Set<String> preciosExtra = new HashSet<>(); // Llevar a clase precio
 
     public Pizza(String masa, String tipoPizza, String tamano) {
         this.masa = masa;
@@ -45,30 +44,48 @@ public class Pizza {
     public void setTamano(String tamano) {
         this.tamano = tamano;
     }
+    
+     
+    public void setPreciosExtra(String ingrediente) {        
+        preciosExtra.add(ingrediente);
+    }
+    
+    public void limpiarPreciosExtra() { 
+        preciosExtra.clear();
+    }
+
+    public String lista() {
+        String respuesta = "";
+        
+        for (String ingredientes : preciosExtra) {            
+            respuesta += ingredientes + " ";
+        }
+        
+        return respuesta;
+    }
 
     public double calcularPrecio() { // Se queda aqui
 
         //ATRIBUTOS
-        double total = 0.0, precioMasa = 0.0, precioTipo = 0.0, precioIngredientes = 0.0, precioTamano = 1.0, totalFormateado = 0.0;
+        double total, precioMasa, precioTipo, precioIngredientes = 0.0, precioTamano = 1.0, totalFormateado, precio;
 
         //CALCULO PRECIO TIPO MASA
-        precioMasa = p1.buscarPrecio(masa);
+        precioMasa = precios.buscarPrecio(this.masa);
 
         //CALCULO PRECIO TIPO DE PIZZA
-        precioTipo = p1.buscarPrecio(getTipoPizza());
+        precioTipo = precios.buscarPrecio(this.tipoPizza);
 
         //CALCULO PRECIO INGREDIENTES
-        double precio;
-        for (String ingrediente : p1.preciosExtra) {
-            precio = p1.buscarPrecio(ingrediente);
+        for (String ingrediente : this.preciosExtra) {
+            precio = precios.buscarPrecio(ingrediente);
             precioIngredientes = precioIngredientes + precio;
         }
-
+        
         //CALCULO PRECIO TAMAÑO
-        System.out.println(p1.preciosExtra.toString());
-        System.out.println(precioIngredientes);
-        precioTamano = p1.buscarPrecio(getTamano());
-
+        if (precios.buscarPrecio(getTamano()) != 0.0) {
+            precioTamano = precios.buscarPrecio(getTamano());
+        }
+        
         total = precioMasa + precioTipo + precioIngredientes;
         total = total * precioTamano;
         totalFormateado = Math.round(total * 100.0) / 100.0;
@@ -81,33 +98,5 @@ public class Pizza {
 
         return tiquet;
     }
-
-    public String ingredientes() {
-        
-        
-        String cadena = "", jamon = "", queso = "", tomate = "", cebolla = "", olivas = "";
-        for (String ingrediente : p1.preciosExtra) {
-
-            if (ingrediente.equals("Jamon")) {
-                jamon = "Jamón, ";
-            }
-            if (ingrediente.equals("Queso")) {
-                queso = "Queso, ";
-            }
-            if (ingrediente.equals("Tomate")) {
-                tomate = "Tomate, ";
-            }
-            if (ingrediente.equals("Cebolla")) {
-                cebolla = "Cebolla, ";
-            }
-            if (ingrediente.equals("Olivas")) {
-                olivas = "Olivas";
-            }
-        }
-
-        cadena = jamon + queso + tomate + cebolla + olivas;
-
-        return cadena;
-    }
-
+    
 }

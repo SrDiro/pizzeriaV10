@@ -1,14 +1,11 @@
 package modelo;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Precios {
     
-    final Set<String> preciosExtra = new HashSet<>(); // Llevar a clase precio
-    private final Map<String, Double> precios = new HashMap<>(); //Llecar a clase precio
+    private final Map<String, Double> precios = new HashMap<>();
     
     {
         precios.put("Normal", 9.0);
@@ -30,23 +27,20 @@ public class Precios {
     }
     
     
-    public void modificarPrecios(String nombre, double cantidad) { // Llevar a clase precio
+    public void modificarPrecios(String nombre, double cantidad) {
         precios.computeIfPresent(nombre, (k, v) -> cantidad);
     }
         
-    public double buscarPrecio(String nombre) { // Llevar a clase precio
+    public double buscarPrecio(String nombre) {
         double precio;
-
-        precio = precios.get(nombre);
-
+        
+        if (precios.get(nombre) == null) {
+            precio = 0.0;
+        } else {
+            precio = precios.get(nombre);
+        }
+        
         return precio;
     }
-
-    public void setPreciosExtra(String ingrediente) {
-        
-        preciosExtra.add(ingrediente);
-        
-    }
-    
-    
+   
 }

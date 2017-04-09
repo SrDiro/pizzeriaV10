@@ -177,17 +177,19 @@ public class FXMLDocumentController implements Initializable {
     private TextField precioCambiarJamon;
     @FXML
     private Button botonCerrarSesion;
-    
-    //MIS ATRIBUTOS    
+
+    //LISTAS
     ObservableList<String> listaTipoPizzas = FXCollections.observableArrayList("Basica", "Cuatro Quesos", "Barbacoa", "Mexicana");
     ObservableList<String> listaIngredientes = FXCollections.observableArrayList("Sin extra", "Jamon", "Queso", "Tomate", "Cebolla", "Olivas", "Picante");
     ObservableList<String> listaTamanos = FXCollections.observableArrayList("Grande", "Mediana", "Pequeña");
     ObservableList<String> list = FXCollections.observableArrayList();
 
-    String tipoMasa = "", tipoPizza = "", tamano = "Pequeña";
-    Pizza p1 = new Pizza(tipoMasa, tipoPizza, tamano);
-    Precios p = new Precios();
-    
+    //OBJETOS
+    Pizza pizza = new Pizza();
+    Precios precios = new Precios();
+
+    //ATRIBUTOS
+    String tipoMasa, tipoPizza, tamano;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -260,20 +262,21 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void tipoMasa(ActionEvent event) {
         if (rbNormal.isSelected()) {
+            pizza.setMasa("Normal");
             tipoMasa = "Normal";
             labelMasa.setText(tipoMasa);
             labelMasa.setVisible(true);
 
         } else if (rbIntegral.isSelected()) {
+            pizza.setMasa("Integral");
             tipoMasa = "Integral";
             labelMasa.setText(tipoMasa);
             labelMasa.setVisible(true);
 
         }
-        p1.setMasa(tipoMasa);
 
-        precioFinalMasa.setText(p.buscarPrecio(tipoMasa) + "€");
-        precioFinalPedido.setText(p1.calcularPrecio() + "€");
+        precioFinalMasa.setText(precios.buscarPrecio(tipoMasa) + "€");
+        precioFinalPedido.setText(pizza.calcularPrecio() + "€");
 
     }
 
@@ -284,9 +287,9 @@ public class FXMLDocumentController implements Initializable {
         labelTipoPizza.setText(tipoPizza);
         labelTipoPizza.setVisible(true);
 
-        p1.setTipoPizza(tipoPizza);
-        precioFinalTipo.setText(p.buscarPrecio(tipoPizza) + "€");
-        precioFinalPedido.setText(p1.calcularPrecio() + "€");
+        pizza.setTipoPizza(tipoPizza);
+        precioFinalTipo.setText(precios.buscarPrecio(pizza.getTipoPizza()) + "€");
+        precioFinalPedido.setText(pizza.calcularPrecio() + "€");
 
     }
 
@@ -294,30 +297,34 @@ public class FXMLDocumentController implements Initializable {
     private void tipoIngredientes(MouseEvent event) {
         double total, precioSin = 0.0, precioJamon = 0.0, precioQueso = 0.0, precioTomate = 0.0, precioCebolla = 0.0, precioOlivas = 0.0;
         boolean apretado = false;
+        String listaIngredientes = "";
 
         paneFuego.setVisible(false);
         ObservableList<String> selectedItems = lvIngredientes.getSelectionModel().getSelectedItems();
+        pizza.limpiarPreciosExtra();
 
         for (String ingrediente : selectedItems) {
-            p.setPreciosExtra(ingrediente);
+            pizza.setPreciosExtra(ingrediente);
+            listaIngredientes = pizza.lista();
+
             if (ingrediente.equals("Sin extra")) {
-                precioSin = p.buscarPrecio(ingrediente);
+                precioSin = precios.buscarPrecio(ingrediente);
                 apretado = true;
             }
             if (ingrediente.equals("Jamon")) {
-                precioJamon = p.buscarPrecio(ingrediente);
+                precioJamon = precios.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Queso")) {
-                precioQueso = p.buscarPrecio(ingrediente);
+                precioQueso = precios.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Tomate")) {
-                precioTomate = p.buscarPrecio(ingrediente);
+                precioTomate = precios.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Cebolla")) {
-                precioCebolla = p.buscarPrecio(ingrediente);
+                precioCebolla = precios.buscarPrecio(ingrediente);
             }
             if (ingrediente.equals("Olivas")) {
-                precioOlivas = p.buscarPrecio(ingrediente);
+                precioOlivas = precios.buscarPrecio(ingrediente);
             }
 
             if (ingrediente.equalsIgnoreCase("Picante")) {
@@ -332,14 +339,13 @@ public class FXMLDocumentController implements Initializable {
             precioFinalIngredientes.setText(total + "€");
         } else {
             total = precioSin + precioJamon + precioQueso + precioTomate + precioCebolla + precioOlivas;
-            labelIngredientes.setText(p1.ingredientes());
-            System.out.println(p1.ingredientes());
+            labelIngredientes.setText(listaIngredientes);
             precioFinalIngredientes.setText(total + "€");
         }
 
         labelIngredientes.setVisible(true);
 
-        precioFinalPedido.setText(p1.calcularPrecio() + "€");
+        precioFinalPedido.setText(pizza.calcularPrecio() + "€");
 
     }
 
@@ -351,16 +357,16 @@ public class FXMLDocumentController implements Initializable {
         labelTamano.setVisible(true);
         labelTamano.setText(tamano);
 
-        p1.setTamano(tamano);
+        pizza.setTamano(tamano);
         if (tamano.equalsIgnoreCase("Pequeña")) {
-            precioTamano = p.buscarPrecio(tamano) + "";
+            precioTamano = precios.buscarPrecio(tamano) + "";
 
         }
         if (tamano.equalsIgnoreCase("Mediana")) {
-            precioTamano = p.buscarPrecio(tamano) + "";
+            precioTamano = precios.buscarPrecio(tamano) + "";
         }
         if (tamano.equalsIgnoreCase("Grande")) {
-            precioTamano = p.buscarPrecio(tamano) + "0";
+            precioTamano = precios.buscarPrecio(tamano) + "0";
         }
         StringTokenizer st = new StringTokenizer(precioTamano, ".");
 
@@ -369,7 +375,7 @@ public class FXMLDocumentController implements Initializable {
         }
         precioFinalTamano.setText(token + "%");
 
-        precioFinalPedido.setText(p1.calcularPrecio() + "");
+        precioFinalPedido.setText(pizza.calcularPrecio() + "€");
     }
 
     @FXML
@@ -384,11 +390,11 @@ public class FXMLDocumentController implements Initializable {
             paneCebolla.setVisible(true);
             paneOlivas.setVisible(true);
 
-            mostrarPrecioJamon.setText(p.buscarPrecio("Jamon") + "€");
-            mostrarPrecioQueso.setText(p.buscarPrecio("Queso") + "€");
-            mostrarPrecioTomate.setText(p.buscarPrecio("Tomate") + "€");
-            mostrarPrecioCebolla.setText(p.buscarPrecio("Cebolla") + "€");
-            mostrarPrecioOlivas.setText(p.buscarPrecio("Olivas") + "€");
+            mostrarPrecioJamon.setText(precios.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso.setText(precios.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate.setText(precios.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla.setText(precios.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas.setText(precios.buscarPrecio("Olivas") + "€");
 
         }
     }
@@ -420,23 +426,23 @@ public class FXMLDocumentController implements Initializable {
             paneNotFound.setVisible(true);
             labelNotFound.setVisible(true);
         } else if (ingrediente.equalsIgnoreCase("Jamon") || ingrediente.equalsIgnoreCase("Jamón")) {
-            mostrarPrecioJamon.setText(p.buscarPrecio("Jamon") + "€");
+            mostrarPrecioJamon.setText(precios.buscarPrecio("Jamon") + "€");
             paneJamon.setVisible(true);
             paneJamon.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Queso")) {
-            mostrarPrecioQueso.setText(p.buscarPrecio("Queso") + "€");
+            mostrarPrecioQueso.setText(precios.buscarPrecio("Queso") + "€");
             paneQueso.setVisible(true);
             paneQueso.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Tomate")) {
-            mostrarPrecioTomate.setText(p.buscarPrecio("Tomate") + "€");
+            mostrarPrecioTomate.setText(precios.buscarPrecio("Tomate") + "€");
             paneTomate.setVisible(true);
             paneTomate.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Cebolla")) {
-            mostrarPrecioCebolla.setText(p.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioCebolla.setText(precios.buscarPrecio("Cebolla") + "€");
             paneCebolla.setVisible(true);
             paneCebolla.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else if (ingrediente.equalsIgnoreCase("Olivas")) {
-            mostrarPrecioOlivas.setText(p.buscarPrecio("Olivas") + "€");
+            mostrarPrecioOlivas.setText(precios.buscarPrecio("Olivas") + "€");
             paneOlivas.setVisible(true);
             paneOlivas.setStyle("-fx-background-color: rgba(193,8,16,1);");
         } else {
@@ -465,11 +471,11 @@ public class FXMLDocumentController implements Initializable {
 
         if (botonLogin.isFocused()) {
 
-            mostrarPrecioJamon1.setText(p.buscarPrecio("Jamon") + "€");
-            mostrarPrecioQueso1.setText(p.buscarPrecio("Queso") + "€");
-            mostrarPrecioTomate1.setText(p.buscarPrecio("Tomate") + "€");
-            mostrarPrecioCebolla1.setText(p.buscarPrecio("Cebolla") + "€");
-            mostrarPrecioOlivas1.setText(p.buscarPrecio("Olivas") + "€");
+            mostrarPrecioJamon1.setText(precios.buscarPrecio("Jamon") + "€");
+            mostrarPrecioQueso1.setText(precios.buscarPrecio("Queso") + "€");
+            mostrarPrecioTomate1.setText(precios.buscarPrecio("Tomate") + "€");
+            mostrarPrecioCebolla1.setText(precios.buscarPrecio("Cebolla") + "€");
+            mostrarPrecioOlivas1.setText(precios.buscarPrecio("Olivas") + "€");
 
             if (user.equals("admin")) {
                 usuario = true;
@@ -509,8 +515,6 @@ public class FXMLDocumentController implements Initializable {
         precioCebolla = precioCambiarCebolla.getText();
         precioOlivas = precioCambiarOlivas.getText();
 
-        System.out.println(precioJamon);
-
         if (!precioJamon.isEmpty()) {
             precioJ = Double.parseDouble(precioCambiarJamon.getText());
         }
@@ -534,19 +538,19 @@ public class FXMLDocumentController implements Initializable {
         if (botonAplicarCambios.isFocused()) {
 
             if (precioJ >= 0.0) {
-                p.modificarPrecios("Jamon", precioJ);
+                precios.modificarPrecios("Jamon", precioJ);
             }
             if (precioQ >= 0.0) {
-                p.modificarPrecios("Queso", precioQ);
+                precios.modificarPrecios("Queso", precioQ);
             }
             if (precioT >= 0.0) {
-                p.modificarPrecios("Tomate", precioT);
+                precios.modificarPrecios("Tomate", precioT);
             }
             if (precioC >= 0.0) {
-                p.modificarPrecios("Cebolla", precioC);
+                precios.modificarPrecios("Cebolla", precioC);
             }
             if (precioO >= 0.0) {
-                p.modificarPrecios("Olivas", precioO);
+                precios.modificarPrecios("Olivas", precioO);
             }
 
         }
@@ -557,11 +561,11 @@ public class FXMLDocumentController implements Initializable {
         precioCambiarCebolla.setText("");
         precioCambiarOlivas.setText("");
 
-        mostrarPrecioJamon1.setText(p.buscarPrecio("Jamon") + "€");
-        mostrarPrecioQueso1.setText(p.buscarPrecio("Queso") + "€");
-        mostrarPrecioTomate1.setText(p.buscarPrecio("Tomate") + "€");
-        mostrarPrecioCebolla1.setText(p.buscarPrecio("Cebolla") + "€");
-        mostrarPrecioOlivas1.setText(p.buscarPrecio("Olivas") + "€");
+        mostrarPrecioJamon1.setText(precios.buscarPrecio("Jamon") + "€");
+        mostrarPrecioQueso1.setText(precios.buscarPrecio("Queso") + "€");
+        mostrarPrecioTomate1.setText(precios.buscarPrecio("Tomate") + "€");
+        mostrarPrecioCebolla1.setText(precios.buscarPrecio("Cebolla") + "€");
+        mostrarPrecioOlivas1.setText(precios.buscarPrecio("Olivas") + "€");
 
     }
 
