@@ -1,5 +1,6 @@
 package pizzav1.pkg0;
 
+import java.io.IOException;
 import modelo.Pizza;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -190,6 +191,8 @@ public class FXMLDocumentController implements Initializable {
 
     //ATRIBUTOS
     String tipoMasa, tipoPizza, tamano;
+    @FXML
+    private Button botonGenerarTicket;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -578,6 +581,13 @@ public class FXMLDocumentController implements Initializable {
             fieldUsuario.setText("");
             fieldContrasenya.setText("");
         }
+    }
+
+    @FXML
+    private void generarTicket(ActionEvent event) throws IOException {
+        
+        pizza.generarTicket();
+        
     }
 
 }

@@ -35,11 +35,11 @@
     -fx-background-repeat: no-repeat;
 }
 
-#finalizarCompra, #botonMostrarTodos, #botonBuscarPrecio{
+#finalizarCompra, #botonMostrarTodos, #botonBuscarPrecio, #botonGenerarTicket{
     -fx-background-color: linear-gradient(#c10810 0%, #dc0914 25%, #f6232d 75%, #f8545c 100%);
 }
 
-#finalizarCompra:hover, #botonMostrarTodos:hover, #botonBuscarPrecio:hover{
+#finalizarCompra:hover, #botonMostrarTodos:hover, #botonBuscarPrecio:hover, #botonGenerarTicket:hover{
     -fx-background-color: #f73b45;
 }
 
